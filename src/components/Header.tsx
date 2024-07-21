@@ -4,9 +4,9 @@ type HeaderProps = {}
 
 const Header: React.FC<HeaderProps> = () => {
   return (
-    <div className="h-[10svh] w-screen bg-slate-400 text-slate-950">
+    <header className="flex h-[10svh] w-screen items-center justify-center bg-slate-400 text-slate-950">
       This is Header
-    </div>
+    </header>
   )
 }
 export default Header
