@@ -14,7 +14,7 @@ function Header() {
     >
       <h1 className="font-serif text-2xl font-bold">Job Tracker</h1>
       {/* Links */}
-      {cookie.token !== "undefined" ? (
+      {cookie && cookie.token && cookie.token !== "undefined" ? (
         <Button
           onClick={() => {
             removeCookie("token")
