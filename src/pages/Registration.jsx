@@ -61,7 +61,7 @@ function Register() {
           onSubmit={handleSubmit}
           className="flex flex-col gap-4"
         >
-          <label>Username</label>
+          {/* <label>Username</label> */}
           {/* <Input
             onChange={(e) => {
               setCredentials((prev) => ({ ...prev, username: e.target.value }))
@@ -70,6 +70,7 @@ function Register() {
           /> */}
           <label>Email</label>
           <Input
+            required={true}
             onChange={(e) => {
               setCredentials((prev) => ({ ...prev, email: e.target.value }))
             }}
@@ -77,6 +78,7 @@ function Register() {
           />
           <label>Password</label>
           <Input
+            required={true}
             onChange={(e) => {
               setCredentials((prev) => ({ ...prev, password: e.target.value }))
             }}

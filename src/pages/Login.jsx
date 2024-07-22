@@ -17,10 +17,11 @@ function Login() {
     email: "",
     password: "",
   })
-  const [cookies, setCookie, removeCookie] = useCookies(["token"])
+
+  const [setCookie] = useCookies(["token"])
   const { toast } = useToast()
 
-  async function handleSubmit(e) {
+  async function Submit(e) {
     e.preventDefault()
     try {
       const response = await fetch(
@@ -55,6 +56,7 @@ function Login() {
       console.log("Error:", error)
     }
   }
+
   return (
     <Card className="m-auto w-96">
       <CardHeader>
@@ -63,18 +65,22 @@ function Login() {
       </CardHeader>
       <CardContent>
         <form
-          onSubmit={handleSubmit}
+          onSubmit={Submit}
           className="flex flex-col gap-4"
         >
           <label>Email</label>
           <Input
+            required={true}
             onChange={(e) => {
               setCredentials((prev) => ({ ...prev, email: e.target.value }))
             }}
             type="email"
+            placeholder="john@doe.com"
           />
+
           <label>Password</label>
           <Input
+            required={true}
             onChange={(e) => {
               setCredentials((prev) => ({ ...prev, password: e.target.value }))
             }}
