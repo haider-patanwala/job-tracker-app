@@ -8,7 +8,9 @@ import {
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import React from "react"
+import { useEffect } from "react"
 import { useCookies } from "react-cookie"
+import { useNavigate } from "react-router-dom"
 import { Link } from "react-router-dom"
 
 function Register() {
@@ -18,7 +20,15 @@ function Register() {
     email: "",
     password: "",
   })
-  const [cookies, setCookie, removeCookie] = useCookies(["token"])
+  const [cookie, setCookie] = useCookies(["token"])
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (cookie && cookie.token && cookie.token !== "undefined") {
+      navigate("/")
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   async function handleSubmit(e) {
     e.preventDefault()
@@ -39,6 +49,9 @@ function Register() {
 
       if (response.ok) {
         console.log("Registration successful!", data)
+        setTimeout(() => {
+          navigate("/")
+        }, 2000)
         setCookie("token", data.data.token)
       } else {
         console.log("Registration failed.", data)

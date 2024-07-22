@@ -9,7 +9,9 @@ import {
 import { Input } from "@/components/ui/input"
 import { useToast } from "@/components/ui/use-toast"
 import React from "react"
+import { useEffect } from "react"
 import { useCookies } from "react-cookie"
+import { useNavigate } from "react-router-dom"
 import { Link } from "react-router-dom"
 
 function Login() {
@@ -17,8 +19,16 @@ function Login() {
     email: "",
     password: "",
   })
+  const [cookie, setCookie] = useCookies(["token"])
+  const navigate = useNavigate()
 
-  const [setCookie] = useCookies(["token"])
+  useEffect(() => {
+    if (cookie && cookie.token && cookie.token !== "undefined") {
+      navigate("/")
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   const { toast } = useToast()
 
   async function Submit(e) {
@@ -38,12 +48,15 @@ function Login() {
 
       if (response.ok) {
         console.log("Login successful!", data)
+        setCookie("token", data.data.token)
+        setTimeout(() => {
+          navigate("/")
+        }, 2000)
         toast({
           title: "Login successful!",
           description: "You have successfully logged in.",
           variant: "success",
         })
-        setCookie("token", data.data.token)
       } else {
         toast({
           title: "Login failed!",

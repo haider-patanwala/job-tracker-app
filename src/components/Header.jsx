@@ -25,12 +25,13 @@ function Header() {
         </Button>
       ) : (
         <div>
-          <Button variant="ghost">
-            <Link to="/login">Login</Link>
-          </Button>
-          <Button variant="ghost">
-            <Link to="/register">Register</Link>
-          </Button>
+          <Link to="/login">
+            <Button variant="ghost">Login</Button>
+          </Link>
+
+          <Link to="/register">
+            <Button variant="ghost">Register</Button>
+          </Link>
         </div>
       )}
     </header>

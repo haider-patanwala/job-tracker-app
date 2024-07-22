@@ -10,7 +10,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       defaultSetOptions={{
         doNotUpdate: false,
         path: "/",
-        expires: 2,
       }}
     >
       <App />
