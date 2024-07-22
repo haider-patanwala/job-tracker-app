@@ -4,6 +4,9 @@ import Home from "./pages/Home"
 import NotFound from "./pages/NotFound"
 import Login from "./pages/Login"
 import Register from "./pages/Registration"
+import Jobs from "./pages/Jobs"
+import Dashboard from "./pages/Dashboard"
+import AddJob from "./pages/AddJob"
 
 export default function App() {
   return (
@@ -19,11 +22,23 @@ export default function App() {
           />
           <Route
             path="login"
-          element={<Login />}
+            element={<Login />}
+          />
+          <Route
+            path="jobs"
+            element={<Jobs />}
+          />
+          <Route
+            path="add-job"
+            element={<AddJob />}
+          />
+          <Route
+            path="dashboard"
+            element={<Dashboard />}
           />
           <Route
             path="register"
-          element={<Register />}
+            element={<Register />}
           />
           <Route
             path="*"

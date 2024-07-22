@@ -1,6 +1,6 @@
 import { useCookies } from "react-cookie"
 import { Button } from "./ui/button"
-import { Link } from "react-router-dom"
+import { NavLink } from "react-router-dom"
 
 function Header() {
   const [cookie, removeCookie] = useCookies(["token"], {
@@ -8,12 +8,46 @@ function Header() {
   })
 
   return (
-    <header
-      className="flex h-[10svh] w-screen items-center justify-between bg-slate-400 px-[20%]
-        text-white"
-    >
-      <h1 className="font-serif text-2xl font-bold">Job Tracker</h1>
-      {/* Links */}
+    <header className="flex h-[10svh] w-screen items-center justify-between px-[10%] text-slate-900">
+      <NavLink
+        to={"/"}
+        className="font-sans text-2xl font-bold"
+      >
+        Job Tracker
+      </NavLink>
+      {/* NavLinks */}
+      <div>
+        <NavLink to="/dashboard">
+          {({ isActive }) => (
+            <Button
+              className={isActive ? "bg-slate-100" : ""}
+              variant="ghost"
+            >
+              Dashboard
+            </Button>
+          )}
+        </NavLink>
+        <NavLink to="/jobs">
+          {({ isActive }) => (
+            <Button
+              className={isActive ? "bg-slate-100" : ""}
+              variant="ghost"
+            >
+              Jobs
+            </Button>
+          )}
+        </NavLink>
+        <NavLink to="/add-job">
+          {({ isActive }) => (
+            <Button
+              className={isActive ? "bg-slate-100" : ""}
+              variant="ghost"
+            >
+              Add Job
+            </Button>
+          )}
+        </NavLink>
+      </div>
       {cookie && cookie.token && cookie.token !== "undefined" ? (
         <Button
           onClick={() => {
@@ -25,13 +59,13 @@ function Header() {
         </Button>
       ) : (
         <div>
-          <Link to="/login">
+          <NavLink to="/login">
             <Button variant="ghost">Login</Button>
-          </Link>
+          </NavLink>
 
-          <Link to="/register">
+          <NavLink to="/register">
             <Button variant="ghost">Register</Button>
-          </Link>
+          </NavLink>
         </div>
       )}
     </header>

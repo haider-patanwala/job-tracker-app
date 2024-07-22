@@ -5,7 +5,7 @@ import { Toaster } from "@/components/ui/toaster"
 
 function Layout() {
   return (
-    <main className="flex min-h-screen w-screen flex-col">
+    <main className="flex min-h-screen w-screen flex-col items-center justify-center">
       <Header />
       <Outlet />
       <Footer />

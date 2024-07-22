@@ -1,13 +1,24 @@
-import React from "react"
 import { Button } from "@/components/ui/button"
+import { Link } from "react-router-dom"
 
 function Home() {
-  const [count, setCount] = React.useState(0)
   return (
-    <div className="flex h-screen w-screen flex-col items-center justify-center gap-5">
-      Have a good coding x {count}
-      <Button onClick={() => setCount((prev) => prev + 1)}>Click me</Button>
-      <Button onClick={() => setCount(0)}>Reset</Button>
+    <div className="my-auto flex w-screen items-center justify-between gap-5">
+      <div className="flex h-[60vh] w-[60%] flex-col justify-center bg-slate-800 pl-[10rem] pr-[10rem]">
+        <p className="text-6xl font-bold text-white">
+          One step closer to your dream job
+        </p>
+        <Link to={"/jobs"}>
+          <Button className="mt-14 w-52 py-4 text-xl">Explore</Button>
+        </Link>
+      </div>
+      <div className="flex w-[40%] flex-col justify-center">
+        <img
+          src="/hero-image.jpg"
+          alt="hero-image"
+          className="aspect-video w-full -translate-x-[25%] rounded-xl object-cover"
+        />
+      </div>
     </div>
   )
 }
