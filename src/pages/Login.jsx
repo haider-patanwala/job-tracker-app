@@ -7,8 +7,10 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
+import { useToast } from "@/components/ui/use-toast"
 import React from "react"
 import { useCookies } from "react-cookie"
+import { Link } from "react-router-dom"
 
 function Login() {
   const [credentials, setCredentials] = React.useState({
@@ -16,6 +18,7 @@ function Login() {
     password: "",
   })
   const [cookies, setCookie, removeCookie] = useCookies(["token"])
+  const { toast } = useToast()
 
   async function handleSubmit(e) {
     e.preventDefault()
@@ -34,8 +37,18 @@ function Login() {
 
       if (response.ok) {
         console.log("Login successful!", data)
+        toast({
+          title: "Login successful!",
+          description: "You have successfully logged in.",
+          variant: "success",
+        })
         setCookie("token", data.data.token)
       } else {
+        toast({
+          title: "Login failed!",
+          description: "Please check your credentials and try again.",
+          variant: "destructive",
+        })
         console.log("Login failed.", data)
       }
     } catch (error) {
@@ -67,7 +80,17 @@ function Login() {
             }}
             type="password"
           />
+
           <Button type="submit">Login</Button>
+          <p>
+            Don't have an account?{" "}
+            <Link
+              className="font-semibold underline hover:text-blue-600"
+              to="/register"
+            >
+              Register
+            </Link>
+          </p>
         </form>
       </CardContent>
     </Card>

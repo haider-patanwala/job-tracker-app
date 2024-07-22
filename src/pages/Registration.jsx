@@ -9,6 +9,7 @@ import {
 import { Input } from "@/components/ui/input"
 import React from "react"
 import { useCookies } from "react-cookie"
+import { Link } from "react-router-dom"
 
 function Register() {
   const [credentials, setCredentials] = React.useState({
@@ -82,6 +83,15 @@ function Register() {
             type="password"
           />
           <Button type="submit">Register</Button>
+          <p>
+            Already have an account?{" "}
+            <Link
+              className="font-semibold underline hover:text-blue-600"
+              to="/login"
+            >
+              Login
+            </Link>
+          </p>
         </form>
       </CardContent>
     </Card>
