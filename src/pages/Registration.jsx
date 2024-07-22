@@ -7,6 +7,7 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
+import { useToast } from "@/components/ui/use-toast"
 import React from "react"
 import { useEffect } from "react"
 import { useCookies } from "react-cookie"
@@ -16,13 +17,14 @@ import { Link } from "react-router-dom"
 function Register() {
   const [credentials, setCredentials] = React.useState({
     // TODO: Add username in backend
-    // username: "",
+    username: "",
     email: "",
     password: "",
   })
   const [cookie, setCookie] = useCookies(["token"])
   const navigate = useNavigate()
 
+  const { toast } = useToast()
   useEffect(() => {
     if (cookie && cookie.token && cookie.token !== "undefined") {
       navigate("/")
@@ -53,8 +55,18 @@ function Register() {
           navigate("/")
         }, 2000)
         setCookie("token", data.data.token)
+        toast({
+          title: "Registration successful!",
+          description: "You have successfully logged in.",
+          variant: "success",
+        })
       } else {
         console.log("Registration failed.", data)
+        toast({
+          title: "Registration unsuccessful!",
+          description: "There was an error registering you.",
+          variant: "destructive",
+        })
       }
     } catch (error) {
       console.log("Error:", error)
@@ -74,13 +86,14 @@ function Register() {
           onSubmit={handleSubmit}
           className="flex flex-col gap-4"
         >
-          {/* <label>Username</label> */}
-          {/* <Input
+          <label>Username</label>
+          <Input
+            required={true}
             onChange={(e) => {
               setCredentials((prev) => ({ ...prev, username: e.target.value }))
             }}
-            type="name"
-          /> */}
+            type="text"
+          />
           <label>Email</label>
           <Input
             required={true}
