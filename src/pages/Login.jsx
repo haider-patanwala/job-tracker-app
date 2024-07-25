@@ -19,7 +19,7 @@ function Login() {
     email: "",
     password: "",
   })
-  const [cookie, setCookie] = useCookies(["token"])
+  const [cookie, setCookie, removeCookie] = useCookies(["token"])
   const navigate = useNavigate()
 
   useEffect(() => {

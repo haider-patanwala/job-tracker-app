@@ -24,6 +24,8 @@ function AddJob() {
   const [cookiee] = useCookies(["token"])
   const { toast } = useToast()
 
+  console.log(errors)
+
   const onSubmit = async (data) => {
     const formdata = {
       companyName: data.company,
@@ -80,23 +82,31 @@ function AddJob() {
             <Label>Company Name</Label>
             <Input
               type="text"
+              className={`${errors.company && "border-red-500"} `}
               placeholder="Company Name"
               {...register("company", { required: "Company name is required" })}
             />
 
+            {errors.company && (
+              <p className="text-red-500">{errors.company.message}</p>
+            )}
             <Label>Job Title</Label>
             <Input
+              className={errors.job_title ? "border-red-500" : ""}
               type="text"
               placeholder="Job Title"
               {...register("job_title", { required: "Job title is required" })}
             />
+            {errors.job_title && (
+              <p className="text-red-500">{errors.job_title.message}</p>
+            )}
             <Label>Application Status</Label>
             <RadioGroup
               defaultValue="applied"
               {...register("application_status", {
-                required: "Status is required",
+                required: "Application Status is required",
               })}
-              className="flex flex-wrap gap-5 text-black"
+              className={`flex flex-wrap gap-5 text-black ${errors.application_status && "border-red-500"}`}
             >
               <div className="flex gap-4">
                 <Label>Applied</Label>
@@ -115,31 +125,48 @@ function AddJob() {
                 <RadioGroupItem value="Rejected" />
               </div>
             </RadioGroup>
+            {errors.application_status && (
+              <p className="text-red-500">
+                {errors.application_status.message}
+              </p>
+            )}
             <Label>Application Dates</Label>
             <input
               {...register("application_date", {
                 required: "Please Select Date",
               })}
               type="date"
-              className="w-full rounded-lg border bg-white px-4 py-2 text-black"
+              className={`w-full rounded-lg border bg-white px-4 py-2 text-black ${
+                errors.application_date && "border-red-500" }`}
             />
+            {errors.application_date && (
+              <p className="text-red-500">{errors.application_date.message}</p>
+            )}
+
             <Label>Follow Up Dates</Label>
             <input
               {...register("follow_up_date", {
                 required: "Please Select Date",
               })}
               type="date"
-              className="w-full rounded-lg border bg-white px-4 py-2 text-black"
+              className={`w-full rounded-lg border bg-white px-4 py-2 text-black ${ errors.follow_up_date
+                && "border-red-500" }`}
             />
 
+            {errors.follow_up_date && (
+              <p className="text-red-500">{errors.follow_up_date.message}</p>
+            )}
             <Label>Notes</Label>
             <Input
               {...register("description", {
                 required: "Description is required",
               })}
               type="description"
-              className="h-[10rem] w-full"
+              className={`h-[10rem] w-full ${errors.description && "border-red-500"}`}
             />
+            {errors.description && (
+              <p className="text-red-500">{errors.description.message}</p>
+            )}
             <Button
               type="submit"
               className="w-full rounded-lg bg-black text-white disabled:opacity-75"
